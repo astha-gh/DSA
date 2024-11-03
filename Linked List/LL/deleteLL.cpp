@@ -38,6 +38,31 @@ Node* delTail(Node* head){
     return head;
 }
 
+Node* removeK(Node* head , int k){
+    if(head == nullptr) return head;
+    if(k == 1){
+        Node* temp = head;
+        head = head->next;
+        free(temp);
+        return head;
+    }
+    int count = 0;
+    Node* temp = head;
+    Node* prev = nullptr;
+    while(temp != nullptr){
+        count++;
+        if(count == k){
+            prev->next = prev->next->next;
+            free(temp);
+            break;
+        }
+        prev = temp;
+        temp = temp->next;
+    }
+    return head;
+}
+
+
 int main(){
     Node* head = new Node(1);
     Node* sec = new Node(2);
@@ -55,7 +80,10 @@ int main(){
     // Node* ans = delHead(head);
     // cout<<ans->data<<endl;
 
-    delTail(head);
+    // delTail(head);
+    // traverse(head);
+
+    head = removeK(head , 3);
     traverse(head);
 
     
